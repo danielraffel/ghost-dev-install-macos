@@ -2,7 +2,7 @@
 
 set -e
 
-# Make sure nvm is loaded
+# Load nvm
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"
 
@@ -15,7 +15,6 @@ then
 fi
 
 echo "📁 Creating ghost/ folder next to this repo..."
-
 cd ..
 mkdir -p ghost
 cd ghost
@@ -28,14 +27,11 @@ nvm alias default 20
 echo "📝 Writing .nvmrc..."
 echo "20" > .nvmrc
 
-echo "📁 Initializing project..."
-npm init -y
-
-echo "🔧 Installing ghost-cli and yarn locally..."
-npm install --save-dev ghost-cli yarn
-
 echo "⚙️ Installing Ghost locally in dev mode..."
 npx ghost install local
+
+echo "🔧 Installing yarn and gscan (optional dev tools)..."
+npm install --save-dev yarn gscan
 
 echo "✅ Ghost is running at http://localhost:2368"
 echo "🛠️ Admin panel: http://localhost:2368/ghost"
