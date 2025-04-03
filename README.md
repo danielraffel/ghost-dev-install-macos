@@ -1,13 +1,14 @@
 # 🧑‍💻 Ghost Local Development on macOS
 
-This guide helps you set up a fully disposable, version-controlled [Ghost local development environment](https://ghost.org/docs/install/local/) on macOS using:
+This guide helps you set up a [Ghost local development environment](https://ghost.org/docs/install/local/) on macOS with minimal global dependencies, so it’s easy to maintain — and just as easy to delete without leaving anything behind.
 
-- Node.js **v20** is installed via [`nvm`](https://github.com/nvm-sh/nvm), matching the [recommended version](https://ghost.org/docs/faq/node-versions/) for Ghost at the time of publishing.
-- Local-only installs of `ghost-cli`, `yarn`, and optionally `gscan`
-- Auto-managed Node versions via `.nvmrc`
-- Theme development with GitHub integration
-- A cleanup-friendly structure — delete the folder, and it's gone!
-
+It includes:
+	•	Node.js **v20** installed via [`nvm`](https://github.com/nvm-sh/nvm), matching the [recommended version](https://ghost.org/docs/faq/node-versions/) for Ghost at the time of publishing.
+	•	Local installs of `yarn` and `gscan`, avoiding global clutter
+	•	Auto-managed Node versions via `.nvmrc`
+	•	Theme development with GitHub integration
+	•	A cleanup-friendly setup — just delete the project folder to remove everything
+ 
 ---
 
 ## 🧰 Prerequisites
@@ -44,7 +45,7 @@ source ~/.zshrc  # or ~/.bashrc
 
 ## ⚙️ Quick Start
 
-Clone this repo and run the setup script from the directory where you want both this repo and the Ghost project to live side by side. _If that’s unclear, check out the Project Structure example below._
+From the directory where you want both this repo and the Ghost project to live side by side:
 
 ```bash
 git clone https://github.com/danielraffel/ghost-dev-install-macos.git
@@ -54,11 +55,11 @@ chmod +x setup-ghost.sh
 ```
 
 This script will:
-	•	Install Node (via nvm)
-	•	Create a .nvmrc file
-	•	Install yarn
-	•	Clone and set up Ghost in a sibling folder called ghost (right next to ghost-dev-install-macos)
-	•	Launch your local Ghost development site
+- Install Node (via nvm)
+- Create a .nvmrc file
+- Clone and set up Ghost in a sibling folder called `ghost`
+- Install `yarn` and `gscan` as local dev tools
+- Launch your local Ghost development site
 
 ---
 
@@ -84,66 +85,56 @@ echo "20" > .nvmrc
 
 ---
 
-### 2. Initialize and Install Dev Tools
+### 2. Install Ghost Locally
+
+Use the globally installed `ghost-cli` or install it first:
 
 ```bash
-npm init -y
-npm install --save-dev ghost-cli yarn
+npm install -g ghost-cli
 ```
 
-You now have access to:
+Then in your working directory:
 
-- `npx ghost` for all Ghost CLI commands
-- `npx yarn` for theme dependency management
+```bash
+mkdir ghost && cd ghost
+ghost install local
+```
 
 ---
 
-### 3. Install Ghost Locally (Dev Mode)
-
-Navigate to the `ghost/` folder (created next to this setup repo), then:
+### 3. Install Dev Tools
 
 ```bash
-npx ghost install local
+npm init -y
+npm install --save-dev yarn gscan
 ```
 
-This sets up:
-- Ghost running on http://localhost:2368
-- Admin panel at http://localhost:2368/ghost
-- SQLite3 database in `content/data/`
-- Content folder with themes at `content/themes/`
+This gives you access to:
+
+- `npx yarn` for theme dependency management
+- `npx gscan` for theme validation
 
 ---
 
 ### 4. Develop Your Custom Theme
-
-Clone your theme repo inside the Ghost content folder:
 
 ```bash
 cd content/themes
 git clone https://github.com/YOUR_USERNAME/YOUR_THEME_REPO.git my-theme
 ```
 
-Then activate it via Admin → **Settings → Design**.
+Activate the theme via Admin → **Settings → Design**.
 
-Ghost supports automatic reload on changes to `.hbs`, `.css`, `.js`.  
+Ghost supports live reload for `.hbs`, `.css`, `.js`.  
 Restart Ghost if you add **new files**:
 
 ```bash
-npx ghost restart
+ghost restart
 ```
 
 ---
 
-### 5. (Optional) Validate Your Theme
-
-```bash
-npm install --save-dev gscan
-npx gscan content/themes/my-theme
-```
-
----
-
-### 6. Cleanup
+### 5. Cleanup
 
 To delete the Ghost dev environment:
 
@@ -168,12 +159,15 @@ rm -rf ~/.nvm
 ## 📂 Project Structure
 
 ```
-path/to/install/folder/
-├── ghost/                    # Ghost install target
+path/to/your/dev/folder/
+├── ghost/                    # Ghost project folder
 │   ├── content/
 │   ├── versions/
-│   └── ...
-└── ghost-dev-install-macos/  # Setup repo
+│   ├── config.development.json
+│   ├── .nvmrc
+│   ├── package.json
+│   └── node_modules/
+└── ghost-dev-install-macos/  # Setup helper repo
     ├── setup-ghost.sh
     └── README.md
 ```
@@ -186,7 +180,7 @@ path/to/install/folder/
 
 - Keeps your system clean
 - Makes installs portable and per-project
-- No conflicts between versions across projects
+- No conflicts between node versions across projects
 
 ### 🤓 Do I need to install `npm`?
 
@@ -214,7 +208,7 @@ nvm use  # will auto-switch to the correct version
 
 ### 🧽 How do I clean up everything?
 
-- Delete the entire Ghost dev setup:
+- Delete the Ghost dev setup:
   ```bash
   rm -rf ../ghost
   ```
@@ -222,10 +216,22 @@ nvm use  # will auto-switch to the correct version
   ```bash
   nvm uninstall 20
   ```
-- Remove `nvm` (if you really want to):
+- Remove `nvm`:
   ```bash
   rm -rf ~/.nvm
   ```
+
+### ⚠️ Why do I see npm warnings and vulnerabilities after installation?
+
+This is normal. Some dev tools like `gscan` use outdated or deprecated packages. These warnings are safe to ignore for local development.
+
+You can optionally run:
+
+```bash
+npm audit fix
+```
+
+But unless you're publishing a package to production, it’s probably fine to leave them.
 
 ---
 
@@ -235,8 +241,12 @@ nvm use  # will auto-switch to the correct version
 |-------------------------|-------------------------------------------|
 | Install Node            | `nvm install 20`                          |
 | Auto Node switching     | `.nvmrc` + `nvm use`                      |
-| Install tools           | `npm install --save-dev ghost-cli yarn`  |
-| Start Ghost             | `npx ghost install local`                |
-| Restart Ghost           | `npx ghost restart`                       |
+| Install Ghost           | `ghost install local`                    |
+| Install tools           | `npm install --save-dev yarn gscan`      |
+| Restart Ghost           | `ghost restart`                          |
 | Validate theme (opt)    | `npx gscan path/to/theme`                |
 | Cleanup                 | `rm -rf ../ghost`                         |
+
+## 🛑 Disclaimer:
+
+Note: Use this at your own risk. This setup is provided as-is and may change or break as dependencies evolve.
