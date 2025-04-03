@@ -2,8 +2,7 @@
 
 This guide helps you set up a fully disposable, version-controlled [Ghost local development environment](https://ghost.org/docs/install/local/) on macOS using:
 
-- Node.js **v20** via [`nvm`](https://github.com/nvm-sh/nvm) [based on latest recommended node version](https://ghost.org/docs/faq/node-versions/) at time of publishing this repo
-- Node.js v20 is installed via [`nvm`](https://github.com/nvm-sh/nvm), matching the [recommended version](https://ghost.org/docs/faq/node-versions/) for Ghost at the time of publishing.
+- Node.js **v20** is installed via [`nvm`](https://github.com/nvm-sh/nvm), matching the [recommended version](https://ghost.org/docs/faq/node-versions/) for Ghost at the time of publishing.
 - Local-only installs of `ghost-cli`, `yarn`, and optionally `gscan`
 - Auto-managed Node versions via `.nvmrc`
 - Theme development with GitHub integration
