@@ -42,17 +42,23 @@ source ~/.zshrc  # or ~/.bashrc
 
 ---
 
-## ⚙️ Quick Start (One-Command Setup)
+## ⚙️ Quick Start
 
-Clone this repo and run the script:
+Clone this repo and run the setup script:
 
 ```bash
-git clone https://github.com/danielraffel/ghost-dev-install-macos.git ~/ghost-dev
-cd ~/ghost-dev
+mkdir my-ghost-project && cd my-ghost-project
+git clone https://github.com/danielraffel/ghost-dev-install-macos.git
+cd ghost-dev-install-macos
 ./setup-ghost.sh
 ```
 
-This does all the steps below automatically: installs Node, sets up Ghost, creates `.nvmrc`, installs `yarn`, and starts your dev site.
+This script will:
+	•	Install Node (via nvm)
+	•	Create a .nvmrc file
+	•	Install yarn
+	•	Clone and set up Ghost in a sibling folder called ghost (right next to ghost-dev-install-macos)
+	•	Launch your local Ghost development site
 
 ---
 
@@ -93,6 +99,8 @@ You now have access to:
 ---
 
 ### 3. Install Ghost Locally (Dev Mode)
+
+Navigate to the `ghost/` folder (created next to this setup repo), then:
 
 ```bash
 npx ghost install local
@@ -140,13 +148,13 @@ npx gscan content/themes/my-theme
 To delete the Ghost dev environment:
 
 ```bash
-rm -rf ~/ghost-dev
+rm -rf ../ghost
 ```
 
 To remove the installed Node version:
 
 ```bash
-nvm uninstall 20.19.0
+nvm uninstall 20
 ```
 
 To remove `nvm` entirely (if desired):
@@ -160,16 +168,14 @@ rm -rf ~/.nvm
 ## 📂 Project Structure
 
 ```
-ghost-dev/
-├── .nvmrc
-├── content/
-│   ├── data/         # SQLite DB
-│   ├── themes/       # Custom themes go here
-│   └── logs/         # Optional log output
-├── versions/         # Ghost core binary
-├── node_modules/     # Local dependencies (ghost-cli, yarn, etc.)
-├── package.json
-└── setup-ghost.sh    # Setup script
+my-ghost-project/
+├── ghost/                    # Ghost install target
+│   ├── content/
+│   ├── versions/
+│   └── ...
+└── ghost-dev-install-macos/  # Setup repo
+    ├── setup-ghost.sh
+    └── README.md
 ```
 
 ---
@@ -202,7 +208,7 @@ Use `.nvmrc` to pin versions per project.
 `.nvmrc` is a simple file that specifies which version of Node to use in a project. It makes collaboration and automation easier.
 
 ```bash
-echo "20.19.0" > .nvmrc
+echo "20" > .nvmrc
 nvm use  # will auto-switch to the correct version
 ```
 
@@ -210,11 +216,11 @@ nvm use  # will auto-switch to the correct version
 
 - Delete the entire Ghost dev setup:
   ```bash
-  rm -rf ~/ghost-dev
+  rm -rf ../ghost
   ```
 - Remove Node version:
   ```bash
-  nvm uninstall 20.19.0
+  nvm uninstall 20
   ```
 - Remove `nvm` (if you really want to):
   ```bash
@@ -225,12 +231,12 @@ nvm use  # will auto-switch to the correct version
 
 ## ✅ Summary
 
-| Task                    | Command / File                      |
-|-------------------------|-------------------------------------|
-| Install Node            | `nvm install 20.19.0`               |
-| Auto Node switching     | `.nvmrc` + `nvm use`                |
-| Install tools           | `npm install --save-dev ghost-cli yarn` |
-| Start Ghost             | `npx ghost install local`           |
-| Restart Ghost           | `npx ghost restart`                 |
-| Validate theme (opt)    | `npx gscan path/to/theme`           |
-| Cleanup                 | `rm -rf ~/ghost-dev`                |
+| Task                    | Command / File                            |
+|-------------------------|-------------------------------------------|
+| Install Node            | `nvm install 20`                          |
+| Auto Node switching     | `.nvmrc` + `nvm use`                      |
+| Install tools           | `npm install --save-dev ghost-cli yarn`  |
+| Start Ghost             | `npx ghost install local`                |
+| Restart Ghost           | `npx ghost restart`                       |
+| Validate theme (opt)    | `npx gscan path/to/theme`                |
+| Cleanup                 | `rm -rf ../ghost`                         |
