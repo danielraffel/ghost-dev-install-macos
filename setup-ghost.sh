@@ -2,9 +2,12 @@
 
 set -e
 
+# Make sure nvm is loaded
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
+
 echo "🚀 Setting up Ghost local development..."
 
-# Make sure nvm is available
 if ! command -v nvm &> /dev/null
 then
     echo "❌ nvm is not installed. Please install it first using Homebrew and configure your shell."
