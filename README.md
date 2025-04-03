@@ -47,7 +47,7 @@ source ~/.zshrc  # or ~/.bashrc
 Clone this repo and run the script:
 
 ```bash
-git clone https://github.com/danielraffel/ghost-dev-install-macos.git
+git clone https://github.com/danielraffel/ghost-dev-install-macos.git ~/ghost-dev
 cd ~/ghost-dev
 ./setup-ghost.sh
 ```
