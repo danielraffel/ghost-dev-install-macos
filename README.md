@@ -44,7 +44,7 @@ source ~/.zshrc  # or ~/.bashrc
 
 ## ⚙️ Quick Start
 
-Clone this repo and run the setup script:
+Clone this repo and run the setup script from the directory where you want both this repo and the Ghost project to live side by side. _If that’s unclear, check out the Project Structure example below._
 
 ```bash
 git clone https://github.com/danielraffel/ghost-dev-install-macos.git
