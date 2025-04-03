@@ -28,7 +28,14 @@ echo "📝 Writing .nvmrc..."
 echo "20" > .nvmrc
 
 echo "⚙️ Installing Ghost locally in dev mode..."
-npx ghost install local
+
+# Try using npx first, fallback to globally installed ghost-cli
+if ! npx ghost install local; then
+    echo "⚠️ npx ghost failed. Attempting to install ghost-cli globally..."
+    npm install -g ghost-cli
+    echo "🔁 Retrying ghost install using global ghost..."
+    ghost install local
+fi
 
 echo "🔧 Installing yarn and gscan (optional dev tools)..."
 npm install --save-dev yarn gscan
