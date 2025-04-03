@@ -251,20 +251,26 @@ But unless you're publishing a package to production, it’s probably fine to le
 
 ## 🧙 Bonus: Auto-Use `.nvmrc` Node Version on `cd`
 
-To automatically use the correct Node.js version when switching into your Ghost dev folder, add this to your `~/.zshrc` (for Zsh) or `~/.bashrc`:
+To automatically use the correct Node.js version when switching into your Ghost dev folder (or any folder with an `.nvmrc`), add this to your `~/.zshrc` (for Zsh) or `~/.bashrc`:
 
 ```bash
+# Load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+
 # Auto-switch Node versions when entering folders with .nvmrc
 autoload -U add-zsh-hook
 
 load-nvmrc() {
   if [ -f .nvmrc ]; then
     nvm use &> /dev/null
+  elif nvm_rc_version=$(nvm version default); then
+    nvm use default &> /dev/null
   fi
 }
 
 add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+load-nvmrc  # run once at startup
 ```
 
 Once added, run:
@@ -274,6 +280,24 @@ source ~/.zshrc  # or ~/.bashrc
 ```
 
 Now when you `cd ghost`, your terminal will automatically use Node v20 from `.nvmrc` — no need to run `nvm use` manually again.
+
+---
+
+### 💡 Why the `elif`?
+
+The added `elif` fallback helps prevent getting “N/A” errors if `.nvmrc` is missing — it falls back to your **default Node version**, which you can set with:
+
+```bash
+nvm alias default 20
+```
+
+This sets Node.js v20 as your go-to version when no `.nvmrc` file is found. You only need to run that once, and `nvm` will remember it. To check what your current default is:
+
+```bash
+nvm alias
+```
+
+This makes your shell experience smoother overall, especially if you switch between projects that do or don’t have `.nvmrc` files.
 
 ---
 
