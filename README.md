@@ -247,6 +247,36 @@ But unless you're publishing a package to production, it’s probably fine to le
 | Validate theme (opt)    | `npx gscan path/to/theme`                |
 | Cleanup                 | `rm -rf ../ghost`                         |
 
+---
+
+## 🧙 Bonus: Auto-Use `.nvmrc` Node Version on `cd`
+
+To automatically use the correct Node.js version when switching into your Ghost dev folder, add this to your `~/.zshrc` (for Zsh) or `~/.bashrc`:
+
+```bash
+# Auto-switch Node versions when entering folders with .nvmrc
+autoload -U add-zsh-hook
+
+load-nvmrc() {
+  if [ -f .nvmrc ]; then
+    nvm use &> /dev/null
+  fi
+}
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+```
+
+Once added, run:
+
+```bash
+source ~/.zshrc  # or ~/.bashrc
+```
+
+Now when you `cd ghost`, your terminal will automatically use Node v20 from `.nvmrc` — no need to run `nvm use` manually again.
+
+---
+
 ## 🛑 Disclaimer:
 
 Note: Use this at your own risk. This setup is provided as-is and may change or break as dependencies evolve.
