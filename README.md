@@ -3,11 +3,11 @@
 This guide helps you set up a [Ghost local development environment](https://ghost.org/docs/install/local/) on macOS with minimal global dependencies, so it’s easy to maintain — and just as easy to delete without leaving anything behind.
 
 It includes:
-	•	Node.js **v20** installed via [`nvm`](https://github.com/nvm-sh/nvm), matching the [recommended version](https://ghost.org/docs/faq/node-versions/) for Ghost at the time of publishing.
-	•	Local installs of `yarn` and `gscan`, avoiding global clutter
-	•	Auto-managed Node versions via `.nvmrc`
-	•	Theme development with GitHub integration
-	•	A cleanup-friendly setup — just delete the project folder to remove everything
+- Node.js **v20** installed via [`nvm`](https://github.com/nvm-sh/nvm), matching the [recommended version](https://ghost.org/docs/faq/node-versions/) for Ghost at the time of publishing.
+- Local installs of `yarn` and `gscan`, avoiding global clutter
+- Auto-managed Node versions via `.nvmrc`
+- Theme development with GitHub integration
+- A cleanup-friendly setup — just delete the project folder to remove everything
  
 ---
 
@@ -43,7 +43,7 @@ source ~/.zshrc  # or ~/.bashrc
 
 ---
 
-## ⚙️ Quick Start
+## ⚙️ Quick Start (Recommended)
 
 From the directory where you want both this repo and the Ghost project to live side by side:
 
@@ -63,7 +63,7 @@ This script will:
 
 ---
 
-## 🛠 Manual Setup (If You Prefer)
+## 🛠 Manual Setup (Not Recommended _But If You Prefer_)
 
 ### 1. Install Node.js v20
 
