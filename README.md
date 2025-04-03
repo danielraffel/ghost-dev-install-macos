@@ -241,17 +241,21 @@ But unless you're publishing a package to production, it’s probably fine to le
 
 ---
 
-## ✅ Summary
+## ✅ Summary of Commands
 
-| Task                    | Command / File                            |
-|-------------------------|-------------------------------------------|
-| Install Node            | `nvm install 20`                          |
-| Auto Node switching     | `.nvmrc` + `nvm use`                      |
-| Install Ghost           | `ghost install local`                    |
-| Install tools           | `npm install --save-dev yarn gscan`      |
-| Restart Ghost           | `ghost restart`                          |
-| Validate theme (opt)    | `npx gscan path/to/theme`                |
-| Cleanup                 | `rm -rf ../ghost`                         |
+| Task                        | Command / File                            |
+|-----------------------------|-------------------------------------------|
+| Install Node                | `nvm install 20`                          |
+| Auto Node switching         | `.nvmrc` + `nvm use`                      |
+| Install Ghost               | `ghost install local`                     |
+| Start Ghost                 | `ghost start`                             |
+| Stop Ghost                  | `ghost stop`                              |
+| Check Ghost status          | `ghost status`                            |
+| Restart Ghost               | `ghost restart`                           |
+| Install tools               | `npm install --save-dev yarn gscan`       |
+| Install theme deps (Yarn)   | `npx yarn install`                         |
+| Validate theme (Gscan)      | `npx gscan path/to/theme`                 |
+| Cleanup                     | `rm -rf ../ghost`                          |
 
 ---
 
