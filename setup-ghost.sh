@@ -27,13 +27,16 @@ nvm alias default 20
 echo "📝 Writing .nvmrc..."
 echo "20" > .nvmrc
 
-echo "⚙️ Installing Ghost locally in dev mode..."
+echo "📁 Initializing package.json..."
+npm init -y
 
-# Try using npx first, fallback to globally installed ghost-cli
-if ! npx ghost install local; then
-    echo "⚠️ npx ghost failed. Attempting to install ghost-cli globally..."
+echo "🔧 Installing ghost-cli locally..."
+npm install ghost-cli --save-dev
+
+echo "⚙️ Installing Ghost locally using ghost-cli..."
+if ! npx ghost-cli install local; then
+    echo "⚠️ npx ghost-cli failed. Attempting to install ghost-cli globally..."
     npm install -g ghost-cli
-    echo "🔁 Retrying ghost install using global ghost..."
     ghost install local
 fi
 
