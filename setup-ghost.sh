@@ -27,18 +27,19 @@ nvm alias default 20
 echo "📝 Writing .nvmrc..."
 echo "20" > .nvmrc
 
-echo "📁 Initializing package.json..."
-npm init -y
-
-echo "🔧 Installing ghost-cli locally..."
-npm install ghost-cli --save-dev
-
 echo "⚙️ Installing Ghost locally using ghost-cli..."
-if ! npx ghost-cli install local; then
-    echo "⚠️ npx ghost-cli failed. Attempting to install ghost-cli globally..."
+
+# Ensure ghost-cli is globally available
+if ! command -v ghost &> /dev/null; then
+    echo "🔧 Installing ghost-cli globally..."
     npm install -g ghost-cli
-    ghost install local
 fi
+
+# Run the Ghost install
+ghost install local
+
+echo "📁 Initializing project metadata for theme tools..."
+npm init -y
 
 echo "🔧 Installing yarn and gscan (optional dev tools)..."
 npm install --save-dev yarn gscan
