@@ -8,6 +8,12 @@ It includes:
 - Auto-managed Node versions via `.nvmrc`
 - Theme development with GitHub integration
 - A cleanup-friendly setup — just delete the project folder to remove everything
+
+---
+Table of Contents
+- [Quick Start](https://github.com/danielraffel/ghost-dev-install-macos/blob/main/README.md#%EF%B8%8F-quick-start-recommended)
+- [Configuring your profile with Node](https://github.com/danielraffel/ghost-dev-install-macos/blob/main/README.md#-bonus-auto-use-nvmrc-node-version-on-cd)
+- [How to run yarn and gscan](https://github.com/danielraffel/ghost-dev-install-macos/edit/main/README.md#-how-to-run-yarn-and-gscan)
  
 ---
 
@@ -298,6 +304,45 @@ nvm alias
 ```
 
 This makes your shell experience smoother overall, especially if you switch between projects that do or don’t have `.nvmrc` files.
+
+---
+
+## 🧶 How to Run `yarn` and `gscan`
+
+Since this guide installs both `yarn` and `gscan` as **local dev dependencies**, you'll run them using [`npx`](https://docs.npmjs.com/cli/v9/commands/npx). This ensures you're always using the version specific to the project — no need for global installs.
+
+### ✅ To install theme dependencies
+
+If your theme has a `package.json`, run:
+
+```bash
+npx yarn install
+```
+
+This installs the theme's dependencies using `yarn`.
+
+> 💡 If you see a warning about `package-lock.json`, it's because Yarn prefers using `yarn.lock`. You can safely delete `package-lock.json` to avoid conflicts:
+> ```bash
+> rm package-lock.json
+> ```
+
+---
+
+### 🧪 To validate your Ghost theme
+
+Use `gscan` to check for compatibility or errors:
+
+```bash
+npx gscan path/to/your-theme/
+```
+
+For example:
+
+```bash
+npx gscan content/themes/my-theme/
+```
+
+This scans your theme and reports any issues or deprecations based on the current Ghost version.
 
 ---
 
