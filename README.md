@@ -1,4 +1,4 @@
-# 🧑‍💻 Ghost Local Development on macOS
+# 🧑‍💻 Ghost Development on macOS Using Local-Only Dependencies 
 
 This guide helps you set up a [Ghost local development environment](https://ghost.org/docs/install/local/) on macOS with minimal global dependencies, so it’s easy to maintain — and just as easy to delete without leaving anything behind.
 
