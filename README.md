@@ -2,7 +2,7 @@
 
 This guide helps you set up a fully disposable, version-controlled Ghost development environment on macOS using:
 
-- Node.js **v20.19.0** via [`nvm`](https://github.com/nvm-sh/nvm)
+- Node.js **v20** via [`nvm`](https://github.com/nvm-sh/nvm)
 - Local-only installs of `ghost-cli`, `yarn`, and optionally `gscan`
 - Auto-managed Node versions via `.nvmrc`
 - Theme development with GitHub integration
@@ -58,17 +58,17 @@ This does all the steps below automatically: installs Node, sets up Ghost, creat
 
 ## 🛠 Manual Setup (If You Prefer)
 
-### 1. Install Node.js v20.19.0
+### 1. Install Node.js v20
 
 ```bash
-nvm install 20.19.0
-nvm use 20.19.0
+nvm install 20
+nvm use 20
 ```
 
 Then create `.nvmrc`:
 
 ```bash
-echo "20.19.0" > .nvmrc
+echo "20" > .nvmrc
 ```
 
 ✅ **Why `.nvmrc` matters**:
