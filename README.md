@@ -47,7 +47,6 @@ source ~/.zshrc  # or ~/.bashrc
 Clone this repo and run the setup script:
 
 ```bash
-mkdir my-ghost-project && cd my-ghost-project
 git clone https://github.com/danielraffel/ghost-dev-install-macos.git
 cd ghost-dev-install-macos
 chmod +x setup-ghost.sh
@@ -169,7 +168,7 @@ rm -rf ~/.nvm
 ## 📂 Project Structure
 
 ```
-my-ghost-project/
+path/to/install/folder/
 ├── ghost/                    # Ghost install target
 │   ├── content/
 │   ├── versions/
