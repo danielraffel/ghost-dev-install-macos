@@ -13,7 +13,7 @@ It includes:
 Table of Contents
 - [Quick Start](https://github.com/danielraffel/ghost-dev-install-macos/blob/main/README.md#%EF%B8%8F-quick-start-recommended)
 - [Configuring your profile with Node](https://github.com/danielraffel/ghost-dev-install-macos/blob/main/README.md#-bonus-auto-use-nvmrc-node-version-on-cd)
-- [How to run yarn and gscan](https://github.com/danielraffel/ghost-dev-install-macos/edit/main/README.md#-how-to-run-yarn-and-gscan)
+- [How to run yarn and gscan](https://github.com/danielraffel/ghost-dev-install-macos/tree/main?tab=readme-ov-file#-how-to-run-yarn-and-gscan)
  
 ---
 
